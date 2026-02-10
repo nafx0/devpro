@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-oxygen-white: #F9FBFA;
+  --color-oxygen-white: #FDFBF7;
   --color-deep-forest: #0C2D27;
   --color-growth-green: #4ADE80;
 
@@ -13,7 +13,7 @@
 
 /* Force light mode and eliminate overflow */
 :root {
-  --background: #F9FBFA;
+  --background: #FDFBF7;
   --foreground: #0C2D27;
 }
 

@@ -55,13 +55,13 @@ function StatCard({ label, value, numericValue, suffix = "+", className = "" }: 
     }, { scope: cardRef });
 
     return (
-        <div ref={cardRef} className={`bg-white border border-deep-forest/5 p-8 rounded-3xl hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between group ${className}`}>
+        <div ref={cardRef} className={`bg-white border border-deep-forest/5 p-8 rounded-3xl hover:shadow-xl transition-shadow duration-300 flex flex-col items-center lg:items-start justify-between text-center lg:text-left group ${className}`}>
             <div>
                 <span ref={valueRef} className="text-6xl md:text-7xl font-display font-medium text-deep-forest block mb-2">
                     0{suffix}
                 </span>
             </div>
-            <p className="text-lg text-deep-forest/60 font-sans border-t border-deep-forest/10 pt-4 mt-4 group-hover:border-growth-green/50 transition-colors">
+            <p className="text-lg text-deep-forest/60 font-sans border-t border-deep-forest/10 pt-4 mt-4 group-hover:border-growth-green/50 transition-colors w-full">
                 {label}
             </p>
         </div>
@@ -88,10 +88,10 @@ export default function InstitutionalCapability() {
     return (
         <section ref={sectionRef} className="py-24 bg-oxygen-white relative z-10">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="mb-16 max-w-3xl">
+                <div className="mb-16 max-w-3xl text-center lg:text-left mx-auto lg:mx-0">
                     <h2 ref={titleRef} className="text-4xl md:text-5xl font-display font-bold text-deep-forest mb-4">
-                        Driven by Data. <br />
-                        <span className="text-growth-green">Defined by Impact.</span>
+                        Integrated <br />
+                        <span className="text-growth-green">Sustainable Solutions.</span>
                     </h2>
                 </div>
 
@@ -99,7 +99,7 @@ export default function InstitutionalCapability() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
                     {/* Card 1: Experience (Large) */}
                     <StatCard
-                        label="Years of Leadership Policy Experience"
+                        label="Years of Experience"
                         value="25+"
                         numericValue={25}
                         className="lg:col-span-8 bg-gradient-to-br from-white to-oxygen-white"
@@ -115,7 +115,7 @@ export default function InstitutionalCapability() {
 
                     {/* Card 3: Briefs (Standard) */}
                     <StatCard
-                        label="Policy Briefs Published"
+                        label="Research & Publications"
                         value="500+"
                         numericValue={500}
                         className="lg:col-span-4"
@@ -125,7 +125,7 @@ export default function InstitutionalCapability() {
                     <div className="lg:col-span-8 bg-deep-forest text-oxygen-white p-8 rounded-3xl flex items-center justify-center text-center relative overflow-hidden group">
                         <div className="absolute inset-0 bg-growth-green/10 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
                         <h3 className="text-2xl md:text-4xl font-display font-light leading-snug">
-                            Led by <span className="font-bold text-growth-green">Architects</span> of National Climate Policy.
+                            Leading Professional <span className="font-bold text-growth-green">Consultancy</span> for Climate Goals.
                         </h3>
                     </div>
                 </div>

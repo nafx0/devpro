@@ -73,19 +73,19 @@ function PillarCard({ title, description, tags, index }: PillarCardProps) {
 
 const pillars = [
     {
-        title: "Strategic Consultancy",
-        description: "Delivering high-precision GHG inventories, environmental impact assessments (EIA/ESIA), and feasibility studies for national-scale projects.",
-        tags: ["Decarbonization", "Feasibility", "Compliance"]
+        title: "Consultancy & Advisory",
+        description: "Specialized expertise in Energy, Environment, Climate Change, Infrastructure, and Socio-economic development for sustainable growth.",
+        tags: ["Energy", "Climate Change", "Infrastructure"]
     },
     {
-        title: "Capital & Project Development",
-        description: "Structuring financial models and circular economy frameworks to unlock international funding mechanics.",
-        tags: ["Green Finance", "Circular Economy", "Investment"]
+        title: "Project Development",
+        description: "End-to-end support in technology facilitation, financing, sourcing, and implementation of local and international projects.",
+        tags: ["Financing", "Implementation", "Tenders"]
     },
     {
-        title: "Institutional Capacity Building",
-        description: "Empowering stakeholders through specialized training, workshops, and policy advocacy forums.",
-        tags: ["Capacity Building", "Advocacy", "Training"]
+        title: "Research & Capacity Building",
+        description: "Delivering feasibility studies, policy advocacy, training, and stakeholder consultations to strengthen institutional capabilities.",
+        tags: ["Policy Advocacy", "Training", "Feasibility Studies"]
     }
 ];
 
@@ -109,7 +109,7 @@ export default function Pillars() {
     return (
         <section id="pillars" ref={sectionRef} className="py-20 md:py-28 bg-oxygen-white">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 ref={titleRef} className="text-3xl md:text-4xl font-display font-bold text-deep-forest mb-12 md:mb-16">
+                <h2 ref={titleRef} className="text-3xl md:text-4xl font-display font-bold text-deep-forest mb-12 md:mb-16 text-center lg:text-left">
                     Core Pillars of <span className="text-growth-green">Intervention</span>
                 </h2>
 

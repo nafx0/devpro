@@ -59,7 +59,7 @@ export default function KnowledgeHub() {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Header */}
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16 gap-6">
+                <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-12 md:mb-16 gap-6 text-center md:text-left">
                     <div>
                         <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-deep-forest mb-3">
                             The Knowledge Archive
@@ -83,14 +83,14 @@ export default function KnowledgeHub() {
                 </div>
 
                 {/* Filters */}
-                <div className="flex flex-wrap gap-2 md:gap-3 mb-8 md:mb-12">
+                <div className="flex flex-wrap justify-center md:justify-start gap-2 md:gap-3 mb-8 md:mb-12">
                     {(["All", "Policy Briefs", "Research Papers", "Training"] as Category[]).map((cat) => (
                         <button
                             key={cat}
                             onClick={() => setActiveCategory(cat)}
                             className={`px-4 md:px-6 py-2 rounded-full text-xs md:text-sm font-medium transition-all duration-300 border ${activeCategory === cat
-                                    ? "bg-deep-forest text-oxygen-white border-deep-forest"
-                                    : "bg-transparent text-deep-forest/60 border-deep-forest/10 hover:border-deep-forest/30"
+                                ? "bg-deep-forest text-oxygen-white border-deep-forest"
+                                : "bg-transparent text-deep-forest/60 border-deep-forest/10 hover:border-deep-forest/30"
                                 }`}
                         >
                             {cat}
@@ -103,22 +103,27 @@ export default function KnowledgeHub() {
                     {filteredResources.map((item) => (
                         <div
                             key={item.id}
-                            className="group relative bg-white border border-deep-forest/5 p-5 md:p-6 lg:p-8 rounded-2xl lg:rounded-full hover:border-growth-green/30 transition-colors duration-300 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-4"
+                            className="group relative bg-white border border-deep-forest/5 p-5 md:p-6 lg:p-8 rounded-2xl lg:rounded-full hover:border-growth-green/30 transition-colors duration-300 flex flex-row items-center justify-between gap-4 overflow-hidden"
                         >
                             {/* Hover Background */}
                             <div className="absolute inset-0 bg-growth-green/5 rounded-2xl lg:rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
-                            <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-8 lg:gap-12 relative z-10 min-w-0 flex-1">
-                                <span className="text-xs md:text-sm font-mono text-deep-forest/40 flex-shrink-0 min-w-[90px] md:min-w-[100px]">
+                            <div className="flex flex-row items-center gap-4 md:gap-8 lg:gap-12 relative z-10 min-w-0 flex-1 text-left">
+                                <span className="hidden sm:block text-xs md:text-sm font-mono text-deep-forest/40 flex-shrink-0 md:min-w-[100px]">
                                     {item.date}
                                 </span>
-                                <div className="min-w-0">
-                                    <h3 className="text-base md:text-lg lg:text-xl font-display font-medium text-deep-forest truncate">
+                                <div className="min-w-0 flex-1">
+                                    <h3 className="text-base md:text-lg lg:text-xl font-display font-medium text-deep-forest truncate w-full">
                                         {item.title}
                                     </h3>
-                                    <span className="text-xs font-sans text-growth-green uppercase tracking-wider mt-1 block md:hidden">
-                                        {item.category}
-                                    </span>
+                                    <div className="flex items-center gap-2 mt-1 md:hidden">
+                                        <span className="text-[10px] font-mono text-deep-forest/40 sm:hidden">
+                                            {item.date}
+                                        </span>
+                                        <span className="text-[10px] font-sans text-growth-green uppercase tracking-wider">
+                                            {item.category}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
 
@@ -127,7 +132,7 @@ export default function KnowledgeHub() {
                                     {item.category}
                                 </span>
 
-                                <button className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-oxygen-white border border-deep-forest/10 flex items-center justify-center text-deep-forest group-hover:bg-deep-forest group-hover:text-growth-green transition-all duration-300 flex-shrink-0">
+                                <button className="w-10 h-10 rounded-full bg-oxygen-white border border-deep-forest/10 flex items-center justify-center text-deep-forest group-hover:bg-deep-forest group-hover:text-growth-green transition-all duration-300 flex-shrink-0">
                                     {item.type === "PDF" ? <FiDownload size={16} /> : <FiArrowUpRight size={16} />}
                                 </button>
                             </div>
