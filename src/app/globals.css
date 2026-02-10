@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@theme {
+  --color-oxygen-white: #F9FBFA;
+  --color-deep-forest: #0C2D27;
+  --color-growth-green: #4ADE80;
+
+  --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-display: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+
+  --animate-spin-slow: spin 3s linear infinite;
+}
+
+/* Force light mode and eliminate overflow */
+:root {
+  --background: #F9FBFA;
+  --foreground: #0C2D27;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  background: var(--background);
+  color: var(--foreground);
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: #4ADE80;
+  color: #0C2D27;
+}
+
+/* GSAP Helper Classes */
+.clip-text-hidden {
+  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.clip-text-visible {
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
