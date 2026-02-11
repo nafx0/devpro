@@ -11,28 +11,27 @@ if (typeof window !== "undefined") {
 
 interface StatCardProps {
     label: string;
-    value: string; // Keep as string to handle "25+" etc
     numericValue: number; // For animation
     suffix?: string;
     className?: string; // For bento spans
 }
 
-function StatCard({ label, value, numericValue, suffix = "+", className = "" }: StatCardProps) {
+function StatCard({ label, numericValue, suffix = "+", className = "" }: StatCardProps) {
     const cardRef = useRef<HTMLDivElement>(null);
     const valueRef = useRef<HTMLSpanElement>(null);
 
     useGSAP(() => {
-        // Hover effect handled by CSS, Entrance here
+        // Entrance Animation
         gsap.from(cardRef.current, {
             scrollTrigger: {
                 trigger: cardRef.current,
-                start: "top 85%",
+                start: "top 90%",
                 toggleActions: "play none none reverse",
             },
-            y: 50,
+            y: 20,
             opacity: 0,
             duration: 0.8,
-            ease: "power2.out",
+            ease: "power3.out",
         });
 
         // Counter Animation
@@ -43,7 +42,7 @@ function StatCard({ label, value, numericValue, suffix = "+", className = "" }: 
             ease: "power2.out",
             scrollTrigger: {
                 trigger: cardRef.current,
-                start: "top 80%",
+                start: "top 85%",
             },
             onUpdate: () => {
                 if (valueRef.current) {
@@ -55,13 +54,11 @@ function StatCard({ label, value, numericValue, suffix = "+", className = "" }: 
     }, { scope: cardRef });
 
     return (
-        <div ref={cardRef} className={`bg-white border border-deep-forest/5 p-8 rounded-3xl hover:shadow-xl transition-shadow duration-300 flex flex-col items-center lg:items-start justify-between text-center lg:text-left group ${className}`}>
-            <div>
-                <span ref={valueRef} className="text-6xl md:text-7xl font-display font-medium text-deep-forest block mb-2">
-                    0{suffix}
-                </span>
-            </div>
-            <p className="text-lg text-deep-forest/60 font-sans border-t border-deep-forest/10 pt-4 mt-4 group-hover:border-growth-green/50 transition-colors w-full">
+        <div ref={cardRef} className={`p-8 lg:p-10 rounded-[2rem] bg-oxygen-white border border-deep-forest/5 flex flex-col items-center lg:items-start transition-all duration-500 hover:shadow-[0_20px_50px_-15px_rgba(12,45,39,0.05)] group ${className}`}>
+            <span ref={valueRef} className="text-5xl lg:text-6xl font-display font-bold text-deep-forest mb-4">
+                0{suffix}
+            </span>
+            <p className="text-sm font-mono uppercase tracking-widest text-deep-forest/40 border-t border-deep-forest/5 pt-4 w-full group-hover:text-growth-green transition-colors">
                 {label}
             </p>
         </div>
@@ -69,63 +66,37 @@ function StatCard({ label, value, numericValue, suffix = "+", className = "" }: 
 }
 
 export default function InstitutionalCapability() {
-    const sectionRef = useRef<HTMLElement>(null);
-    const titleRef = useRef<HTMLHeadingElement>(null);
-
-    useGSAP(() => {
-        gsap.from(titleRef.current, {
-            scrollTrigger: {
-                trigger: sectionRef.current,
-                start: "top 80%",
-            },
-            y: 30,
-            opacity: 0,
-            duration: 1,
-            ease: "power3.out"
-        });
-    }, { scope: sectionRef });
-
     return (
-        <section ref={sectionRef} className="py-24 bg-oxygen-white relative z-10">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="mb-16 max-w-3xl text-center lg:text-left mx-auto lg:mx-0">
-                    <h2 ref={titleRef} className="text-4xl md:text-5xl font-display font-bold text-deep-forest mb-4">
-                        Integrated <br />
-                        <span className="text-growth-green">Sustainable Solutions.</span>
-                    </h2>
-                </div>
-
+        <section className="py-24 lg:py-32 overflow-hidden">
+            <div className="container-custom">
                 {/* Bento Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
-                    {/* Card 1: Experience (Large) */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 lg:gap-6">
+                    {/* Card 1: Experience */}
                     <StatCard
                         label="Years of Experience"
-                        value="25+"
                         numericValue={25}
-                        className="lg:col-span-8 bg-gradient-to-br from-white to-oxygen-white"
+                        className="lg:col-span-8"
                     />
 
-                    {/* Card 2: Sectors (Standard) */}
+                    {/* Card 2: Sectors */}
                     <StatCard
-                        label="Sectors Transformed"
-                        value="10+"
-                        numericValue={10}
+                        label="Active Sectors"
+                        numericValue={12}
                         className="lg:col-span-4"
                     />
 
-                    {/* Card 3: Briefs (Standard) */}
+                    {/* Card 3: Briefs */}
                     <StatCard
-                        label="Research & Publications"
-                        value="500+"
-                        numericValue={500}
+                        label="Knowledge Briefs"
+                        numericValue={150}
                         className="lg:col-span-4"
                     />
 
-                    {/* Card 4: Trust/Authority (Wide Text Card) */}
-                    <div className="lg:col-span-8 bg-deep-forest text-oxygen-white p-8 rounded-3xl flex items-center justify-center text-center relative overflow-hidden group">
-                        <div className="absolute inset-0 bg-growth-green/10 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
-                        <h3 className="text-2xl md:text-4xl font-display font-light leading-snug">
-                            Leading Professional <span className="font-bold text-growth-green">Consultancy</span> for Climate Goals.
+                    {/* Card 4: Trust/Authority */}
+                    <div className="lg:col-span-8 bg-oxygen-white border border-deep-forest/5 p-8 lg:p-10 rounded-[2rem] flex items-center justify-center text-center lg:text-left relative overflow-hidden group">
+                        <div className="absolute inset-0 bg-deep-forest/[0.02] transition-opacity duration-700 group-hover:bg-deep-forest/[0.04]" />
+                        <h3 className="text-xl lg:text-2xl font-display font-light leading-relaxed text-deep-forest relative z-10 transition-colors group-hover:text-deep-forest">
+                            Pioneering <span className="font-bold text-growth-green">Institutional Strategies</span> for meaningful climate resilience and sustainable economic growth.
                         </h3>
                     </div>
                 </div>

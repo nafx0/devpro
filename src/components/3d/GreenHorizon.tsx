@@ -2,7 +2,7 @@
 
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, Float, PerspectiveCamera, ContactShadows } from "@react-three/drei";
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useState, useEffect } from "react";
 import * as THREE from "three";
 import { Group, Mesh } from "three";
 
@@ -93,9 +93,41 @@ function Landscape() {
 }
 
 export default function GreenHorizon() {
+    // 3D Render Throttling for mobile
+    const [dpr, setDpr] = useState([1, 2]);
+    const [frameloop, setFrameloop] = useState<"always" | "demand" | "never">("always");
+
+    useEffect(() => {
+        const isMobile = window.innerWidth < 768;
+        if (isMobile) {
+            setDpr([1, 1]); // Lower DPR on mobile
+            // We can't easily limit FPS directly in R3F without custom loop, 
+            // but we can optimize DPR and ensure we don't render when not visible.
+        }
+    }, []);
+
+    // Intersection Observer to pause rendering when out of view
+    const containerRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setFrameloop(entry.isIntersecting ? "always" : "never");
+            },
+            { threshold: 0 }
+        );
+
+        if (containerRef.current) {
+            observer.observe(containerRef.current);
+        }
+
+        return () => {
+            observer.disconnect();
+        };
+    }, []);
+
     return (
-        <div className="absolute inset-0 w-full h-full -z-10 bg-gradient-to-b from-oxygen-white to-[#F0FDF4]">
-            <Canvas shadows dpr={[1, 2]}>
+        <div ref={containerRef} className="absolute inset-0 w-full h-full -z-10 bg-gradient-to-b from-oxygen-white to-[#F0FDF4]">
+            <Canvas shadows dpr={dpr as [number, number]} frameloop={frameloop}>
                 <PerspectiveCamera makeDefault position={[0, 0, 8]} fov={50} />
 
                 {/* Ecological Lighting */}

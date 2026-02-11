@@ -23,102 +23,74 @@ function PillarCard({ title, description, tags, index }: PillarCardProps) {
         gsap.from(cardRef.current, {
             scrollTrigger: {
                 trigger: cardRef.current,
-                start: "top 85%",
+                start: "top 90%",
                 toggleActions: "play none none reverse",
             },
-            y: 40,
+            y: 30,
             opacity: 0,
-            duration: 0.8,
-            ease: "power2.out",
-            delay: index * 0.15,
+            duration: 1,
+            ease: "power3.out",
+            delay: index * 0.1,
         });
     }, { scope: cardRef });
 
     return (
         <div
             ref={cardRef}
-            className="bg-deep-forest p-8 md:p-10 lg:p-12 rounded-3xl relative overflow-hidden group border border-white/10 flex flex-col justify-between min-h-[340px] md:min-h-[400px]"
+            className="relative p-10 lg:p-12 rounded-[2.5rem] bg-oxygen-white/[0.03] backdrop-blur-md border border-white/[0.08] flex flex-col justify-between min-h-[420px] transition-all duration-500 hover:bg-white/[0.06] hover:border-white/10 group"
         >
-            {/* Background Texture/Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
-            <div className="absolute -bottom-20 -right-20 w-48 h-48 bg-growth-green/15 rounded-full blur-3xl group-hover:bg-growth-green/25 transition-colors duration-500" />
+            {/* Background Accent */}
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-growth-green/5 rounded-full blur-[80px] group-hover:bg-growth-green/10 transition-colors duration-700" />
 
-            <div className="relative z-10 flex flex-col justify-between h-full">
-                <div>
-                    <span className="text-oxygen-white/30 text-sm font-mono tracking-widest mb-4 block">
-                        0{index + 1}
+            <div className="relative z-10 flex flex-col h-full">
+                <div className="mb-10">
+                    <span className="inline-block text-[10px] font-mono tracking-[0.4em] text-growth-green mb-6 opacity-60 group-hover:opacity-100 transition-opacity">
+                        MODULE / 0{index + 1}
                     </span>
-                    <h3 className="text-2xl md:text-3xl lg:text-4xl font-display font-medium text-oxygen-white leading-tight mb-5">
+                    <h3 className="text-3xl lg:text-4xl font-display font-bold text-oxygen-white leading-[1.15] mb-6">
                         {title}
                     </h3>
-                    <div className="flex flex-wrap gap-2 mb-6">
+                    <div className="flex flex-wrap gap-2.5">
                         {tags.map((tag, i) => (
-                            <span key={i} className="px-3 py-1 rounded-full border border-growth-green/30 text-growth-green text-xs tracking-wider uppercase">
+                            <span key={i} className="px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/5 text-[10px] text-oxygen-white/40 uppercase tracking-widest group-hover:text-oxygen-white/60 group-hover:border-white/10 transition-colors">
                                 {tag}
                             </span>
                         ))}
                     </div>
                 </div>
 
-                <p className="text-base md:text-lg text-oxygen-white/70 font-sans leading-relaxed">
+                <p className="mt-auto text-lg text-oxygen-white/50 font-light leading-relaxed group-hover:text-oxygen-white/70 transition-colors">
                     {description}
                 </p>
             </div>
-
-            {/* Hover Reveal Overlay */}
-            <div className="absolute inset-0 bg-growth-green/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
         </div>
     );
 }
 
 const pillars = [
     {
-        title: "Consultancy & Advisory",
-        description: "Specialized expertise in Energy, Environment, Climate Change, Infrastructure, and Socio-economic development for sustainable growth.",
-        tags: ["Energy", "Climate Change", "Infrastructure"]
+        title: "Policy Advocacy & Research",
+        description: "Shaping national agendas through data-driven advocacy, policy formulation, and high-level stakeholder consultations.",
+        tags: ["Advocacy", "Policy", "Strategy"]
     },
     {
-        title: "Project Development",
-        description: "End-to-end support in technology facilitation, financing, sourcing, and implementation of local and international projects.",
-        tags: ["Financing", "Implementation", "Tenders"]
+        title: "Capacity & Training",
+        description: "Empowering institutions with specialized technical training and knowledge transfer systems for sustainable development.",
+        tags: ["Institutional", "Training", "Development"]
     },
     {
-        title: "Research & Capacity Building",
-        description: "Delivering feasibility studies, policy advocacy, training, and stakeholder consultations to strengthen institutional capabilities.",
-        tags: ["Policy Advocacy", "Training", "Feasibility Studies"]
+        title: "Business Case Support",
+        description: "Architecting viable project financing models and technical sourcing frameworks for complex environmental assignments.",
+        tags: ["Financing", "Sourcing", "Implementation"]
     }
 ];
 
 export default function Pillars() {
-    const sectionRef = useRef<HTMLElement>(null);
-    const titleRef = useRef<HTMLHeadingElement>(null);
-
-    useGSAP(() => {
-        gsap.from(titleRef.current, {
-            scrollTrigger: {
-                trigger: sectionRef.current,
-                start: "top 80%",
-            },
-            y: 30,
-            opacity: 0,
-            duration: 1,
-            ease: "power3.out",
-        });
-    }, { scope: sectionRef });
-
     return (
-        <section id="pillars" ref={sectionRef} className="py-20 md:py-28 bg-oxygen-white">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 ref={titleRef} className="text-3xl md:text-4xl font-display font-bold text-deep-forest mb-12 md:mb-16 text-center lg:text-left">
-                    Core Pillars of <span className="text-growth-green">Intervention</span>
-                </h2>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {pillars.map((pillar, index) => (
-                        <PillarCard key={index} {...pillar} index={index} />
-                    ))}
-                </div>
-            </div>
-        </section>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {pillars.map((pillar, index) => (
+                <PillarCard key={index} {...pillar} index={index} />
+            ))}
+        </div>
     );
 }

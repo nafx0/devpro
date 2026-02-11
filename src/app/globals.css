@@ -48,3 +48,38 @@ body {
   transform: translateY(0);
   transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* Mobile sidebar slide-up animation */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Sidebar scrollbar */
+aside::-webkit-scrollbar {
+  width: 4px;
+}
+
+aside::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+aside::-webkit-scrollbar-thumb {
+  background: rgba(12, 45, 39, 0.08);
+  border-radius: 100px;
+}
+
+aside::-webkit-scrollbar-thumb:hover {
+  background: rgba(12, 45, 39, 0.15);
+}

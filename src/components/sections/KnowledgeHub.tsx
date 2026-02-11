@@ -29,11 +29,10 @@ const resources: Resource[] = [
     { id: "6", date: "May 15, 2025", title: "Sustainable Agriculture Practices Guide", category: "Training", type: "PDF" },
 ];
 
-export default function KnowledgeHub() {
+export default function KnowledgeHub({ dark = false }: { dark?: boolean }) {
     const [activeCategory, setActiveCategory] = useState<Category>("All");
     const [searchTerm, setSearchTerm] = useState("");
-    const sectionRef = useRef<HTMLElement>(null);
-    const titleRef = useRef<HTMLHeadingElement>(null);
+    const sectionRef = useRef<HTMLDivElement>(null);
 
     const filteredResources = resources.filter(item => {
         const matchesCategory = activeCategory === "All" || item.category === activeCategory;
@@ -41,112 +40,115 @@ export default function KnowledgeHub() {
         return matchesCategory && matchesSearch;
     });
 
-    useGSAP(() => {
-        gsap.from(titleRef.current, {
-            scrollTrigger: {
-                trigger: sectionRef.current,
-                start: "top 80%",
-            },
-            y: 30,
-            opacity: 0,
-            duration: 1,
-            ease: "power3.out",
-        });
-    }, { scope: sectionRef });
-
     return (
-        <section id="knowledge" ref={sectionRef} className="py-20 md:py-28 bg-oxygen-white relative z-10">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-
-                {/* Header */}
-                <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-12 md:mb-16 gap-6 text-center md:text-left">
-                    <div>
-                        <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-deep-forest mb-3">
-                            The Knowledge Archive
-                        </h2>
-                        <p className="text-deep-forest/60 max-w-xl text-base md:text-lg">
-                            A digital museum of rigorous research, serving as a bridge between data and policy implementation.
-                        </p>
-                    </div>
-
-                    {/* Search Bar */}
-                    <div className="relative w-full md:w-80 lg:w-96 group flex-shrink-0">
-                        <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-deep-forest/40 group-focus-within:text-growth-green transition-colors" />
-                        <input
-                            type="text"
-                            placeholder="Search policy briefs..."
-                            className="w-full pl-12 pr-4 py-3 md:py-4 bg-white border border-deep-forest/10 rounded-full focus:outline-none focus:border-growth-green/50 focus:ring-1 focus:ring-growth-green/50 transition-all font-sans text-sm md:text-base"
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                        />
-                    </div>
-                </div>
-
+        <div ref={sectionRef} className="w-full">
+            {/* Header Controls */}
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 mb-12">
                 {/* Filters */}
-                <div className="flex flex-wrap justify-center md:justify-start gap-2 md:gap-3 mb-8 md:mb-12">
+                <div className="flex flex-wrap gap-2">
                     {(["All", "Policy Briefs", "Research Papers", "Training"] as Category[]).map((cat) => (
                         <button
                             key={cat}
                             onClick={() => setActiveCategory(cat)}
-                            className={`px-4 md:px-6 py-2 rounded-full text-xs md:text-sm font-medium transition-all duration-300 border ${activeCategory === cat
-                                ? "bg-deep-forest text-oxygen-white border-deep-forest"
-                                : "bg-transparent text-deep-forest/60 border-deep-forest/10 hover:border-deep-forest/30"
-                                }`}
+                            className={clsx(
+                                "px-5 py-2.5 rounded-full text-[10px] font-mono uppercase tracking-[0.2em] transition-all duration-300",
+                                activeCategory === cat
+                                    ? (dark ? "bg-growth-green text-deep-forest" : "bg-deep-forest text-oxygen-white")
+                                    : (dark ? "bg-white/5 text-oxygen-white/40 hover:text-oxygen-white hover:bg-white/10" : "bg-deep-forest/5 text-deep-forest/40 hover:text-deep-forest hover:bg-deep-forest/10")
+                            )}
                         >
                             {cat}
                         </button>
                     ))}
                 </div>
 
-                {/* Resource List */}
-                <div className="flex flex-col gap-2 md:gap-3">
-                    {filteredResources.map((item) => (
-                        <div
-                            key={item.id}
-                            className="group relative bg-white border border-deep-forest/5 p-5 md:p-6 lg:p-8 rounded-2xl lg:rounded-full hover:border-growth-green/30 transition-colors duration-300 flex flex-row items-center justify-between gap-4 overflow-hidden"
-                        >
-                            {/* Hover Background */}
-                            <div className="absolute inset-0 bg-growth-green/5 rounded-2xl lg:rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                {/* Search */}
+                <div className="relative w-full sm:w-64 lg:w-72 group">
+                    <FiSearch className={clsx(
+                        "absolute left-4 top-1/2 -translate-y-1/2 transition-colors",
+                        dark ? "text-oxygen-white/20 group-focus-within:text-growth-green" : "text-deep-forest/20 group-focus-within:text-growth-green"
+                    )} />
+                    <input
+                        type="text"
+                        placeholder="Search archives..."
+                        className={clsx(
+                            "w-full pl-11 pr-4 py-3 border-none rounded-full focus:outline-none focus:ring-2 transition-all font-sans text-sm",
+                            dark
+                                ? "bg-white/5 text-oxygen-white placeholder:text-oxygen-white/20 focus:ring-growth-green/20"
+                                : "bg-deep-forest/[0.03] text-deep-forest placeholder:text-deep-forest/20 focus:ring-growth-green/20"
+                        )}
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                </div>
+            </div>
 
-                            <div className="flex flex-row items-center gap-4 md:gap-8 lg:gap-12 relative z-10 min-w-0 flex-1 text-left">
-                                <span className="hidden sm:block text-xs md:text-sm font-mono text-deep-forest/40 flex-shrink-0 md:min-w-[100px]">
-                                    {item.date}
-                                </span>
-                                <div className="min-w-0 flex-1">
-                                    <h3 className="text-base md:text-lg lg:text-xl font-display font-medium text-deep-forest truncate w-full">
-                                        {item.title}
-                                    </h3>
-                                    <div className="flex items-center gap-2 mt-1 md:hidden">
-                                        <span className="text-[10px] font-mono text-deep-forest/40 sm:hidden">
-                                            {item.date}
-                                        </span>
-                                        <span className="text-[10px] font-sans text-growth-green uppercase tracking-wider">
-                                            {item.category}
-                                        </span>
-                                    </div>
+            {/* Resource List */}
+            <div className="space-y-1">
+                {filteredResources.map((item) => (
+                    <div
+                        key={item.id}
+                        className={clsx(
+                            "group flex items-center justify-between p-6 lg:px-8 rounded-[1.5rem] transition-all duration-500",
+                            dark
+                                ? "hover:bg-white/5"
+                                : "hover:bg-white hover:shadow-[0_20px_60px_-15px_rgba(12,45,39,0.08)]"
+                        )}
+                    >
+                        <div className="flex items-center gap-6 lg:gap-12 min-w-0 flex-1">
+                            <span className={clsx(
+                                "hidden md:block text-[10px] font-mono flex-shrink-0 w-24",
+                                dark ? "text-oxygen-white/20" : "text-deep-forest/20"
+                            )}>
+                                {item.date}
+                            </span>
+                            <div className="flex flex-col min-w-0">
+                                <h3 className={clsx(
+                                    "text-lg lg:text-xl font-display font-semibold transition-colors truncate",
+                                    dark
+                                        ? "text-oxygen-white group-hover:text-growth-green"
+                                        : "text-deep-forest group-hover:text-growth-green"
+                                )}>
+                                    {item.title}
+                                </h3>
+                                <div className="flex items-center gap-3 mt-1.5 md:hidden">
+                                    <span className={clsx("text-[10px] font-mono", dark ? "text-oxygen-white/30" : "text-deep-forest/30")}>{item.date}</span>
+                                    <span className={clsx("w-1 h-1 rounded-full", dark ? "bg-white/10" : "bg-deep-forest/10")} />
+                                    <span className="text-[10px] font-sans text-growth-green uppercase tracking-widest">{item.category}</span>
                                 </div>
                             </div>
-
-                            <div className="flex items-center gap-4 md:gap-6 lg:gap-8 relative z-10 flex-shrink-0">
-                                <span className="hidden md:block text-xs font-sans text-deep-forest/40 uppercase tracking-wider px-3 py-1 border border-deep-forest/5 rounded-full whitespace-nowrap">
-                                    {item.category}
-                                </span>
-
-                                <button className="w-10 h-10 rounded-full bg-oxygen-white border border-deep-forest/10 flex items-center justify-center text-deep-forest group-hover:bg-deep-forest group-hover:text-growth-green transition-all duration-300 flex-shrink-0">
-                                    {item.type === "PDF" ? <FiDownload size={16} /> : <FiArrowUpRight size={16} />}
-                                </button>
-                            </div>
                         </div>
-                    ))}
 
-                    {filteredResources.length === 0 && (
-                        <div className="text-center py-16 md:py-20 text-deep-forest/40 text-sm md:text-base">
-                            No resources found matching your criteria.
+                        <div className="flex items-center gap-6 lg:gap-10 shrink-0">
+                            <span className={clsx(
+                                "hidden md:block text-[9px] font-mono uppercase tracking-[0.2em]",
+                                dark ? "text-oxygen-white/30" : "text-deep-forest/30"
+                            )}>
+                                {item.category}
+                            </span>
+                            <button className={clsx(
+                                "w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500",
+                                dark
+                                    ? "bg-white/5 text-oxygen-white group-hover:bg-growth-green group-hover:text-deep-forest"
+                                    : "bg-deep-forest/5 text-deep-forest group-hover:bg-growth-green group-hover:text-deep-forest"
+                            )}>
+                                {item.type === "PDF" ? <FiDownload size={18} /> : <FiArrowUpRight size={18} />}
+                            </button>
                         </div>
-                    )}
-                </div>
+                    </div>
+                ))}
 
+                {filteredResources.length === 0 && (
+                    <div className={clsx(
+                        "text-center py-24 text-sm italic",
+                        dark ? "text-oxygen-white/20" : "text-deep-forest/20"
+                    )}>
+                        No matches in the knowledge archive.
+                    </div>
+                )}
             </div>
-        </section>
+        </div>
     );
 }
+
+import clsx from "clsx";

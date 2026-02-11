@@ -3,7 +3,9 @@ import { Inter_Tight, Manrope } from "next/font/google";
 import "./globals.css";
 import clsx from "clsx";
 import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import SmoothScroll from "@/components/utils/SmoothScroll";
+import ScrollToTop from "@/components/utils/ScrollToTop";
 
 const interTight = Inter_Tight({
   variable: "--font-inter-tight",
@@ -55,12 +57,12 @@ export default function RootLayout({
         )}
       >
         <SmoothScroll>
+          <ScrollToTop />
           <Navbar />
           {children}
+          <Footer />
         </SmoothScroll>
       </body>
     </html>
   );
 }
-
-
