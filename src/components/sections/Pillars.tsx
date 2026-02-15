@@ -89,7 +89,11 @@ export default function Pillars() {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {pillars.map((pillar, index) => (
-                <PillarCard key={index} {...pillar} index={index} />
+                <div key={index} className="flex justify-center md:block">
+                    <div className="w-full max-w-xl md:max-w-none">
+                        <PillarCard {...pillar} index={index} />
+                    </div>
+                </div>
             ))}
         </div>
     );

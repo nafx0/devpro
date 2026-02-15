@@ -78,7 +78,7 @@ export default function SectionTeaser({
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
                     {/* Content */}
-                    <div className="lg:col-span-5 flex flex-col">
+                    <div className="lg:col-span-5 flex flex-col items-center text-center md:items-start md:text-left">
                         <p className={clsx(
                             "text-xs font-mono uppercase tracking-[0.2em] mb-6",
                             dark ? "text-growth-green/80" : "text-growth-green"
@@ -95,7 +95,7 @@ export default function SectionTeaser({
                             {description}
                         </p>
 
-                        <div className="flex flex-wrap gap-4 items-center">
+                        <div className="flex flex-wrap gap-4 items-center justify-center md:justify-start w-full">
                             <Link
                                 href={portalHref}
                                 ref={buttonRef}
@@ -103,7 +103,7 @@ export default function SectionTeaser({
                                 onMouseEnter={onMouseEnter}
                                 onMouseLeave={onMouseLeave}
                                 className={clsx(
-                                    "group relative inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-medium transition-all duration-300 hover:shadow-xl",
+                                    "btn group relative overflow-hidden transition-all duration-300 hover:shadow-xl",
                                     dark
                                         ? "bg-oxygen-white text-deep-forest hover:bg-white"
                                         : "bg-deep-forest text-oxygen-white hover:bg-black"

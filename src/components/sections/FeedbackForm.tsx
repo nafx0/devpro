@@ -47,16 +47,16 @@ export default function FeedbackForm() {
                 <p className="text-deep-forest/60 max-w-md text-lg leading-relaxed">
                     Your request has been prioritized. A senior consultant will reach out within 24-48 business hours to discuss your objectives.
                 </p>
-                <div className="mt-12 flex flex-col sm:flex-row gap-4">
+                <div className="mt-12 flex flex-col sm:flex-row gap-4 w-full justify-center">
                     <button
                         onClick={() => setSubmitted(false)}
-                        className="px-8 py-3.5 text-sm font-medium text-deep-forest/60 hover:text-deep-forest border border-deep-forest/10 rounded-full transition-all hover:bg-white cursor-pointer"
+                        className="btn btn-muted text-sm hover:text-deep-forest hover:bg-white transition-all cursor-pointer"
                     >
                         Submit New Query
                     </button>
                     <button
                         onClick={() => window.location.href = "/info-center"}
-                        className="px-8 py-3.5 text-sm font-medium bg-deep-forest text-oxygen-white rounded-full transition-all hover:shadow-xl active:scale-95 cursor-pointer"
+                        className="btn btn-primary text-sm transition-all hover:shadow-xl active:scale-95 cursor-pointer"
                     >
                         Visit Knowledge Hub
                     </button>
@@ -69,31 +69,32 @@ export default function FeedbackForm() {
         <form
             ref={formRef}
             onSubmit={handleSubmit}
-            className="rounded-[2.5rem] border border-deep-forest/5 bg-white/40 backdrop-blur-md p-8 lg:p-12 space-y-8 shadow-xl shadow-deep-forest/[0.02]"
+            className="rounded-[2.5rem] border border-deep-forest/10 bg-white/60 backdrop-blur-md p-8 lg:p-12 space-y-8 shadow-xl shadow-deep-forest/[0.02] text-deep-forest"
         >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Name */}
                 <div className="space-y-2">
-                    <label className="block text-[10px] font-mono uppercase tracking-[0.2em] text-deep-forest/40 ml-1">
+                    <label className="block text-[10px] font-mono uppercase tracking-[0.2em] text-deep-forest/70 ml-1">
                         Full Name *
                     </label>
                     <input
                         type="text"
                         required
                         placeholder="John Doe"
-                        className="w-full px-6 py-4 bg-oxygen-white/50 border border-deep-forest/5 rounded-2xl text-deep-forest placeholder:text-deep-forest/20 focus:outline-none focus:ring-2 focus:ring-growth-green/20 focus:border-growth-green/30 transition-all font-sans"
+                        className="w-full px-6 py-4 bg-oxygen-white/80 border border-deep-forest/10 rounded-2xl text-deep-forest placeholder:text-deep-forest/40 focus:outline-none focus:ring-2 focus:ring-growth-green/20 focus:border-growth-green/30 transition-all font-sans"
                     />
                 </div>
+
                 {/* Email */}
                 <div className="space-y-2">
-                    <label className="block text-[10px] font-mono uppercase tracking-[0.2em] text-deep-forest/40 ml-1">
+                    <label className="block text-[10px] font-mono uppercase tracking-[0.2em] text-deep-forest/70 ml-1">
                         Corporate Email *
                     </label>
                     <input
                         type="email"
                         required
                         placeholder="john@organization.com"
-                        className="w-full px-6 py-4 bg-oxygen-white/50 border border-deep-forest/5 rounded-2xl text-deep-forest placeholder:text-deep-forest/20 focus:outline-none focus:ring-2 focus:ring-growth-green/20 focus:border-growth-green/30 transition-all font-sans"
+                        className="w-full px-6 py-4 bg-oxygen-white/80 border border-deep-forest/10 rounded-2xl text-deep-forest placeholder:text-deep-forest/40 focus:outline-none focus:ring-2 focus:ring-growth-green/20 focus:border-growth-green/30 transition-all font-sans"
                     />
                 </div>
             </div>
@@ -101,24 +102,24 @@ export default function FeedbackForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Organization */}
                 <div className="space-y-2">
-                    <label className="block text-[10px] font-mono uppercase tracking-[0.2em] text-deep-forest/40 ml-1">
+                    <label className="block text-[10px] font-mono uppercase tracking-[0.2em] text-deep-forest/70 ml-1">
                         Organization
                     </label>
                     <input
                         type="text"
                         placeholder="Company or Agency Name"
-                        className="w-full px-6 py-4 bg-oxygen-white/50 border border-deep-forest/5 rounded-2xl text-deep-forest placeholder:text-deep-forest/20 focus:outline-none focus:ring-2 focus:ring-growth-green/20 focus:border-growth-green/30 transition-all font-sans"
+                        className="w-full px-6 py-4 bg-oxygen-white/80 border border-deep-forest/10 rounded-2xl text-deep-forest placeholder:text-deep-forest/40 focus:outline-none focus:ring-2 focus:ring-growth-green/20 focus:border-growth-green/30 transition-all font-sans"
                     />
                 </div>
                 {/* Designation */}
                 <div className="space-y-2">
-                    <label className="block text-[10px] font-mono uppercase tracking-[0.2em] text-deep-forest/40 ml-1">
+                    <label className="block text-[10px] font-mono uppercase tracking-[0.2em] text-deep-forest/70 ml-1">
                         Designation
                     </label>
                     <input
                         type="text"
                         placeholder="Your Role"
-                        className="w-full px-6 py-4 bg-oxygen-white/50 border border-deep-forest/5 rounded-2xl text-deep-forest placeholder:text-deep-forest/20 focus:outline-none focus:ring-2 focus:ring-growth-green/20 focus:border-growth-green/30 transition-all font-sans"
+                        className="w-full px-6 py-4 bg-oxygen-white/80 border border-deep-forest/10 rounded-2xl text-deep-forest placeholder:text-deep-forest/40 focus:outline-none focus:ring-2 focus:ring-growth-green/20 focus:border-growth-green/30 transition-all font-sans"
                     />
                 </div>
             </div>
@@ -126,35 +127,35 @@ export default function FeedbackForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Contact Number */}
                 <div className="space-y-2">
-                    <label className="block text-[10px] font-mono uppercase tracking-[0.2em] text-deep-forest/40 ml-1">
+                    <label className="block text-[10px] font-mono uppercase tracking-[0.2em] text-deep-forest/70 ml-1">
                         Contact Number
                     </label>
                     <input
                         type="tel"
                         placeholder="+880 1XXX XXXXXX"
-                        className="w-full px-6 py-4 bg-oxygen-white/50 border border-deep-forest/5 rounded-2xl text-deep-forest placeholder:text-deep-forest/20 focus:outline-none focus:ring-2 focus:ring-growth-green/20 focus:border-growth-green/30 transition-all font-sans"
+                        className="w-full px-6 py-4 bg-oxygen-white/80 border border-deep-forest/10 rounded-2xl text-deep-forest placeholder:text-deep-forest/40 focus:outline-none focus:ring-2 focus:ring-growth-green/20 focus:border-growth-green/30 transition-all font-sans"
                     />
                 </div>
             </div>
 
             {/* Comment */}
             <div className="space-y-2">
-                <label className="block text-[10px] font-mono uppercase tracking-[0.2em] text-deep-forest/40 ml-1">
+                <label className="block text-[10px] font-mono uppercase tracking-[0.2em] text-deep-forest/70 ml-1">
                     Collaboration Query *
                 </label>
                 <textarea
                     required
                     rows={4}
                     placeholder="Briefly describe your requirements or inquiry..."
-                    className="w-full px-6 py-4 bg-oxygen-white/50 border border-deep-forest/5 rounded-2xl text-deep-forest placeholder:text-deep-forest/20 focus:outline-none focus:ring-2 focus:ring-growth-green/20 focus:border-growth-green/30 transition-all font-sans resize-none"
+                    className="w-full px-6 py-4 bg-oxygen-white/80 border border-deep-forest/10 rounded-2xl text-deep-forest placeholder:text-deep-forest/40 focus:outline-none focus:ring-2 focus:ring-growth-green/20 focus:border-growth-green/30 transition-all font-sans resize-none"
                 />
             </div>
 
             {/* Submit */}
-            <div className="pt-4">
+            <div className="pt-4 flex justify-center">
                 <button
                     type="submit"
-                    className="group relative inline-flex items-center gap-3 px-10 py-5 bg-deep-forest text-oxygen-white rounded-full font-medium overflow-hidden transition-all hover:shadow-[0_20px_40px_rgba(12,45,39,0.15)] hover:scale-[1.02] active:scale-95 cursor-pointer w-full sm:w-auto justify-center"
+                    className="btn btn-primary group relative overflow-hidden transition-all hover:shadow-[0_20px_40px_rgba(12,45,39,0.15)] hover:scale-[1.02] active:scale-95 cursor-pointer"
                 >
                     <span className="relative z-10 text-lg">Initiate Collaboration</span>
                     <HiPaperAirplane className="relative z-10 w-5 h-5 -rotate-45 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />

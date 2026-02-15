@@ -51,10 +51,10 @@ export default function Hero() {
                             We help governments, NGOs, and private partners deliver environmentally responsible, measurable development from planning to impact.
                         </p>
 
-                        <div className="flex flex-wrap justify-center lg:justify-start gap-4">
+                        <div className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-4 w-full sm:w-auto">
                             <a
                                 href="#contact"
-                                className="group relative px-8 py-3.5 bg-deep-forest text-oxygen-white rounded-full font-medium overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1 text-center"
+                                className="btn btn-primary group relative overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1"
                                 aria-label="Request a consultation"
                             >
                                 <span className="relative z-10">Request a Consultation</span>
@@ -63,7 +63,7 @@ export default function Hero() {
 
                             <Link
                                 href="/services"
-                                className="px-8 py-3.5 bg-white border border-deep-forest/10 text-deep-forest rounded-full font-medium hover:bg-gray-50 transition-all hover:shadow-md hover:-translate-y-1 text-center"
+                                className="btn btn-surface hover:bg-gray-50 transition-all hover:shadow-md hover:-translate-y-1"
                                 aria-label="Explore services"
                             >
                                 Explore Services
@@ -88,9 +88,6 @@ export default function Hero() {
                                 <p className="mt-1 text-sm md:text-base font-medium text-deep-forest">
                                     “Delivery that strengthens resilience and accountability.”
                                 </p>
-                                <Link href="/about" className="mt-2 inline-flex text-sm font-medium text-deep-forest hover:underline">
-                                    Read the message
-                                </Link>
                             </div>
                         </div>
                     </div>

@@ -300,7 +300,7 @@ export default function Navbar() {
                             <Link
                                 href="/feedback"
                                 onClick={(e) => handleNavClick(e, "/feedback", "feedback")}
-                                className="hidden md:flex px-6 py-2.5 bg-deep-forest text-oxygen-white rounded-full text-sm font-medium hover:bg-deep-forest/90 transition-all shadow-lg shadow-deep-forest/5 active:scale-95"
+                                className="hidden md:inline-flex btn btn-primary text-sm hover:bg-deep-forest/90 transition-all shadow-lg shadow-deep-forest/5 active:scale-95"
                             >
                                 Initiate Partnership
                             </Link>
@@ -334,7 +334,7 @@ export default function Navbar() {
                             <Link
                                 href="/feedback"
                                 onClick={(e) => handleNavClick(e, "/feedback", "feedback")}
-                                className="mobile-nav-item mt-12 block py-5 bg-deep-forest text-oxygen-white rounded-2xl text-center text-lg font-bold shadow-xl shadow-deep-forest/10"
+                                className="mobile-nav-item mt-12 btn btn-primary text-lg font-bold shadow-xl shadow-deep-forest/10"
                             >
                                 Initiate Strategic Collaboration
                             </Link>
