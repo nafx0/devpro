@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
@@ -21,6 +21,22 @@ export default function HeroSlideshow() {
     const [direction, setDirection] = useState(1); // 1 = forward, -1 = backward
     const [isPaused, setIsPaused] = useState(false);
 
+    const swipeRef = useRef<{
+        pointerId: number | null;
+        startX: number;
+        startY: number;
+        lastX: number;
+        lastY: number;
+        isDown: boolean;
+    }>({
+        pointerId: null,
+        startX: 0,
+        startY: 0,
+        lastX: 0,
+        lastY: 0,
+        isDown: false,
+    });
+
     const goToSlide = useCallback((index: number) => {
         setDirection(index > currentIndex ? 1 : -1);
         setCurrentIndex(index);
@@ -35,6 +51,52 @@ export default function HeroSlideshow() {
         setDirection(-1);
         setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
     }, []);
+
+    const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+        // Only enable swipe behavior for touch/pen (avoid interfering with desktop mouse interactions)
+        if (e.pointerType === "mouse") return;
+
+        swipeRef.current.pointerId = e.pointerId;
+        swipeRef.current.isDown = true;
+        swipeRef.current.startX = e.clientX;
+        swipeRef.current.startY = e.clientY;
+        swipeRef.current.lastX = e.clientX;
+        swipeRef.current.lastY = e.clientY;
+
+        setIsPaused(true);
+        e.currentTarget.setPointerCapture(e.pointerId);
+    };
+
+    const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+        if (e.pointerType === "mouse") return;
+        if (!swipeRef.current.isDown) return;
+        if (swipeRef.current.pointerId !== e.pointerId) return;
+
+        swipeRef.current.lastX = e.clientX;
+        swipeRef.current.lastY = e.clientY;
+    };
+
+    const finishPointer = (e: React.PointerEvent<HTMLDivElement>) => {
+        if (e.pointerType === "mouse") return;
+        if (!swipeRef.current.isDown) return;
+        if (swipeRef.current.pointerId !== e.pointerId) return;
+
+        const dx = swipeRef.current.lastX - swipeRef.current.startX;
+        const dy = swipeRef.current.lastY - swipeRef.current.startY;
+        const absDx = Math.abs(dx);
+        const absDy = Math.abs(dy);
+
+        // Only treat as swipe if it's mostly horizontal and above threshold
+        const SWIPE_THRESHOLD = 50;
+        if (absDx > SWIPE_THRESHOLD && absDx > absDy) {
+            if (dx < 0) nextSlide();
+            else prevSlide();
+        }
+
+        swipeRef.current.isDown = false;
+        swipeRef.current.pointerId = null;
+        setIsPaused(false);
+    };
 
     // Auto-play with pause on hover
     useEffect(() => {
@@ -67,9 +129,13 @@ export default function HeroSlideshow() {
 
     return (
         <div
-            className="relative w-full h-full overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl bg-deep-forest group"
+            className="relative w-full h-full overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl bg-deep-forest group touch-pan-y select-none"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
+            onPointerDown={onPointerDown}
+            onPointerMove={onPointerMove}
+            onPointerUp={finishPointer}
+            onPointerCancel={finishPointer}
         >
             {/* ─── Slides ─── */}
             <AnimatePresence initial={false} custom={direction}>
