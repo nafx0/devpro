@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import HeroSlideshow from "@/components/sections/HeroSlideshow";
@@ -32,7 +33,14 @@ export default function Hero() {
 
                     {/* Left Content */}
                     <div ref={textRef} className="flex flex-col justify-center items-center lg:items-start text-center lg:text-left">
-                        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-display text-deep-forest leading-tight md:leading-[1.1] mb-4 mt-10 md:mt-0 tracking-tight">
+                        {/* Fast trust signals*/}
+                        <div className="flex flex-wrap justify-center lg:justify-start gap-2 mt-14 md:mt-10">
+                            <span className="inline-flex items-center rounded-full bg-growth-green/10 border border-growth-green/20 px-5 py-3 text-xs md:text-sm text-deep-forest/80">
+                                Trusted by the Government, NGOs, Institutional partners
+                            </span>
+                        </div>
+
+                        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-display text-deep-forest leading-tight md:leading-[1.1] mb-4 mt-4 tracking-tight">
                             Bridging <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-growth-green to-deep-forest">
                                 Development with Sustainability
@@ -40,18 +48,50 @@ export default function Hero() {
                         </h1>
 
                         <p className="text-base md:text-xl text-deep-forest/80 max-w-lg mb-6 font-sans font-light leading-snug md:leading-relaxed">
-                            We support and ensure all sorts of development in a green, clean, and sustainable way.
+                            We help governments, NGOs, and private partners deliver environmentally responsible, measurable development from planning to impact.
                         </p>
 
                         <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-                            <a href="#contact" className="group relative px-8 py-3.5 bg-deep-forest text-oxygen-white rounded-full font-medium overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1 text-center">
-                                <span className="relative z-10">Initiate Collaboration</span>
+                            <a
+                                href="#contact"
+                                className="group relative px-8 py-3.5 bg-deep-forest text-oxygen-white rounded-full font-medium overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1 text-center"
+                                aria-label="Request a consultation"
+                            >
+                                <span className="relative z-10">Request a Consultation</span>
                                 <div className="absolute inset-0 bg-growth-green opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                             </a>
 
-                            <a href="#capability" className="px-8 py-3.5 bg-white border border-deep-forest/10 text-deep-forest rounded-full font-medium hover:bg-gray-50 transition-all hover:shadow-md hover:-translate-y-1 text-center">
-                                Explore Our Impact
-                            </a>
+                            <Link
+                                href="/services"
+                                className="px-8 py-3.5 bg-white border border-deep-forest/10 text-deep-forest rounded-full font-medium hover:bg-gray-50 transition-all hover:shadow-md hover:-translate-y-1 text-center"
+                                aria-label="Explore services"
+                            >
+                                Explore Services
+                            </Link>
+                        </div>
+
+                        {/* Minimal hero integrations (dummy data) */}
+                        <div className="mt-7 w-full max-w-xl grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div className="rounded-2xl border border-growth-green/20 bg-growth-green/5 p-4 text-left">
+                                <p className="text-xs uppercase tracking-wide text-deep-forest/60">Upcoming Event</p>
+                                <p className="mt-1 text-sm md:text-base font-medium text-deep-forest">
+                                    Sustainable Infrastructure Forum
+                                </p>
+                                <p className="mt-1 text-xs md:text-sm text-deep-forest/70">March 2026 • Online</p>
+                                <Link href="/info-center" className="mt-2 inline-flex text-sm font-medium text-deep-forest hover:underline">
+                                    View details
+                                </Link>
+                            </div>
+
+                            <div className="rounded-2xl border border-growth-green/20 bg-growth-green/5 p-4 text-left">
+                                <p className="text-xs uppercase tracking-wide text-deep-forest/60">Message from the Managing Director</p>
+                                <p className="mt-1 text-sm md:text-base font-medium text-deep-forest">
+                                    “Delivery that strengthens resilience and accountability.”
+                                </p>
+                                <Link href="/about" className="mt-2 inline-flex text-sm font-medium text-deep-forest hover:underline">
+                                    Read the message
+                                </Link>
+                            </div>
                         </div>
                     </div>
 
